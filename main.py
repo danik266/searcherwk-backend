@@ -13,10 +13,15 @@ if sys.platform == "win32":
     asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
 
 app = FastAPI()
-
+origins = [
+    "http://localhost:3000",
+    "https://searcherwk.vercel.app",
+    "https://searcherwk.screcai.site",      # <--- НОВЫЙ ДОМЕН (без слэша)
+    "https://searcherwk.screcai.site/"      # <--- Со слэшем (на всякий)
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # В продакшене лучше указать адрес сайта с Vercel
+    allow_origins=origins,  # В продакшене лучше указать адрес сайта с Vercel
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
