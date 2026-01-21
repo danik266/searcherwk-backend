@@ -1,12 +1,16 @@
 from google import genai
 from google.genai import types
 import os
+from dotenv import load_dotenv
 
-# ТВОЙ КЛЮЧ
-GOOGLE_API_KEY = "AIzaSyBuGiKGwlzE5fOdEh2OltudinqaEdvc5KQ" 
+load_dotenv()
+
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+
+if not GOOGLE_API_KEY:
+    raise ValueError("❌ ОШИБКА: API ключ не найден! Создай файл .env или добавь переменную в настройках Render.")
 
 client = genai.Client(api_key=GOOGLE_API_KEY)
-
 def recognize_product(image_path):
     print(f"👀 Смотрю на {image_path}...")
     
